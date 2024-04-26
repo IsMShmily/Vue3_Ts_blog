@@ -1,0 +1,17 @@
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @mixin b_center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  @mixin text_hide {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
