@@ -1,8 +1,7 @@
-import SvgIcon from "./SvgIcon.vue";
+import SIcon from "./SIcon.vue";
 import MyCom from "./MyCom/index.vue";
-
-//创建全局组件对象
-const allComs: { [key: string]: any } = { SvgIcon, MyCom };
+import SvgIcon from './SvgIcon.vue'
+const allComs: { [key: string]: any } = { SIcon, MyCom,SvgIcon };
 
 export default {
   install(app: any) {

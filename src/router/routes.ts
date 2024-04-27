@@ -3,12 +3,48 @@ import { RouteRecordRaw } from "vue-router";
 export const constantRoute: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "login",
-    component: () => import("@/pages/login/index.vue"),
+    name: "layout",
+    component: () => import("@/pages/layout/index.vue"),
+    redirect: "/home",
     meta: {
-      title: "登录",
+      title: "layout",
     },
+    children: [
+      {
+        path: "home",
+        name: "home",
+        meta: {
+          title: "首页",
+        },
+        component: () => import("@/pages/modules/Home/index.vue"),
+      },
+      {
+        path: "Blogs",
+        name: "Blogs",
+        meta: {
+          title: "博客",
+        },
+        component: () => import("@/pages/modules/Blogs/index.vue"),
+      },
+      {
+        path: "utils",
+        name: "utils",
+        meta: {
+          title: "工具",
+        },
+        component: () => import("@/pages/modules/Utils/index.vue"),
+      },
+      {
+        path: "leave",
+        name: "leave",
+        meta: {
+          title: "留言",
+        },
+        component: () => import("@/pages/modules/Leave/index.vue"),
+      },
+    ],
   },
+
   {
     path: "/404",
     name: "404",
@@ -18,6 +54,6 @@ export const constantRoute: Array<RouteRecordRaw> = [
   {
     path: "/:pathMatch(.*)*",
     redirect: "/404",
-    name: "any",
+    name: "Any",
   },
 ];

@@ -1,17 +1,18 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import allComs from '@/components'
+import router from "@/router";
+import allComs from "@/components";
 import "./styles/index.scss";
+
+//svg插件引入使用
+import "virtual:svg-icons-register";
+
 // Vuetify
 import "vuetify/styles";
-import { createVuetify } from "vuetify";
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
+import vuetify from "@/plugins/vuetify.js";
 
-const vuetify = createVuetify({
-  components,
-  directives,
-});
-const app = createApp(App)
-app.use(allComs)
-app.use(vuetify).mount("#app");
+const app = createApp(App);
+app.use(allComs);
+app.use(router);
+app.use(vuetify);
+app.mount("#app");

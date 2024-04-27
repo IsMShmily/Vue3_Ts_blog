@@ -1,14 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 
 <template>
-  <div>
-    <MyCom></MyCom>
-  </div>
-  
+
+  <v-app >
+    <router-view></router-view>
+  </v-app>
 </template>
 
-<style scoped lang="scss">
-div {
-  @include text_hide;
-}
-</style>
+<style scoped lang="scss"></style>
