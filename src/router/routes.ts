@@ -27,12 +27,12 @@ export const constantRoute: Array<RouteRecordRaw> = [
         component: () => import("@/pages/modules/Blogs/index.vue"),
       },
       {
-        path: "utils",
-        name: "utils",
+        path: "chat",
+        name: "chat",
         meta: {
-          title: "工具",
+          title: "聊天",
         },
-        component: () => import("@/pages/modules/Utils/index.vue"),
+        component: () => import("@/pages/modules/Chat/index.vue"),
       },
       {
         path: "leave",

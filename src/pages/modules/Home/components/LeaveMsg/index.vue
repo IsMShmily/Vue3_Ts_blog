@@ -1,9 +1,13 @@
 <script setup lang="ts"></script>
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col v-for="i in 4" :key="i" cols="12" md="3">
-        <v-card class="mx-auto" max-width="400">
+  <v-container class="mb-6">
+    <h1 class="my-4 font-semibold text-xl flex justify-center">Guestbook</h1>
+    <div class="mb-10 flex justify-center text-center">
+      Exploring Conversations: A Journey through the Guestbook
+    </div>
+    <v-row class="mb-6">
+      <v-col v-for="i in 3" :key="i" cols="12" md="4">
+        <v-card class="mx-auto">
           <template v-slot:prepend>
             <v-avatar
               color="grey-darken-3"

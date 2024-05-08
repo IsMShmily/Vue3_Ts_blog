@@ -11,6 +11,7 @@ interface Iprops {
 }
 const props = defineProps<Iprops>();
 
+// @ts-ignore
 const icon = computed(() => icons[props.name]);
 </script>
 
