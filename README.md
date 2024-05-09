@@ -1,9 +1,19 @@
-# Vue 3 + TypeScript + Vite
+# Vue 3 + TypeScript Blogs
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+The front-end source code of the blog project uses the latest technology Vue3 + Tyepscript + Vite + TailWindocss + Thress ...
 
-## Recommended Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
-
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+<div >
+  <img alt="Vue" src="https://img.shields.io/badge/-vue-%23000000?style=flat-square&logo=vuedotjs" />
+  <img alt="Static Badge" src="https://img.shields.io/badge/-TypeScript-000?style=flat-square&logo=tsnode">
+  <img alt="Vite" src="https://img.shields.io/badge/-vite-%23000000?style=flat-square&logo=vite" />
+  <img alt="Static Badge" src="https://img.shields.io/badge/-ThreeJs-000?style=flat-square&logo=threedotjs">
+  <img alt="Static Badge" src="https://img.shields.io/badge/-sass-000?style=flat-square&logo=sass">
+  <img alt="Static Badge" src="https://img.shields.io/badge/-pnpm-%23000?style=flat-square&logo=pnpm">
+</div>
+<br/>
+<div>
+Blog homepage：
+</div>
+<div>
+CSDN homepage：
+</div>
