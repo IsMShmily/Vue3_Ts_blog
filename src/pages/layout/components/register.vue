@@ -52,6 +52,8 @@ const register = async () => {
     snackbar_text.value = `注册失败：${res.msg}`;
   }
 };
+
+
 </script>
 
 <template>
@@ -123,6 +125,16 @@ const register = async () => {
       </v-card>
     </template>
   </v-dialog>
+
+   <!-- 提示 -->
+   <v-snackbar v-model="snackbar" :timeout="3000">
+    {{ snackbar_text }}
+    <template v-slot:actions>
+      <v-btn color="pink" variant="text" @click="snackbar = false">
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <style lang="scss" scoped></style>
