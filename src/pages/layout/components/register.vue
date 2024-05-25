@@ -1,28 +1,33 @@
 <script setup lang="ts">
-import API from "@/api";
-import { ref } from "vue";
 /**
  * @module 注册相关
  */
+import API from "@/api";
+import { ref } from "vue";
+import Snackbar from "@/components/basic/Snackbar/index.vue";
+
 const signInDialog = ref(false);
 const email = ref("");
 const code = ref("");
 const password = ref("");
 const AlignPassword = ref("");
-const snackbar = ref(false);
 const loading = ref(false);
 const snackbar_text = ref("");
-
+const Snackbar_ref = ref();
+const color = ref("");
 /** 发送验证码 */
 const sendCode = async () => {
   loading.value = true;
   const res = await API.getCode_AJAX({ email: email.value });
   loading.value = false;
   if (res.code == 200) {
+    color.value = "success";
     snackbar_text.value = "发送成功！";
-    snackbar.value = true;
+
+    Snackbar_ref.value.visable = true;
   } else {
-    snackbar.value = true;
+    color.value = "error";
+    Snackbar_ref.value.visable = true;
     snackbar_text.value = `发送失败：${res.msg}`;
   }
 };
@@ -30,7 +35,7 @@ const sendCode = async () => {
 /** 注册 */
 const register = async () => {
   if (password.value != AlignPassword.value) {
-    snackbar.value = true;
+    Snackbar_ref.value.visable = true;
     snackbar_text.value = `两次密码不一致`;
     return;
   }
@@ -46,14 +51,15 @@ const register = async () => {
     email.value = "";
     signInDialog.value = false;
     snackbar_text.value = `注册成功`;
-    snackbar.value = true;
+    Snackbar_ref.value.visable = true;
   } else {
-    snackbar.value = true;
+    Snackbar_ref.value.visable = true;
     snackbar_text.value = `注册失败：${res.msg}`;
   }
 };
-
-
+defineExpose({
+  signInDialog,
+});
 </script>
 
 <template>
@@ -62,14 +68,12 @@ const register = async () => {
       <v-card rounded="lg">
         <v-card-title class="d-flex justify-space-between align-center">
           <div class="text-h5 text-medium-emphasis ps-2">注册您的账号</div>
-
           <v-btn
             icon="mdi-close"
             variant="text"
             @click="isActive.value = false"
           ></v-btn>
         </v-card-title>
-
         <v-card-text>
           <div class="text-medium-emphasis mb-4">请输入您的用户名和密码</div>
           <v-text-field
@@ -111,9 +115,6 @@ const register = async () => {
             label="再次输入密码"
           ></v-text-field
         ></v-card-text>
-
-        <v-divider class="mt-2"></v-divider>
-
         <v-card-actions class="my-2 d-flex justify-end">
           <v-btn
             class="text-none"
@@ -126,15 +127,11 @@ const register = async () => {
     </template>
   </v-dialog>
 
-   <!-- 提示 -->
-   <v-snackbar v-model="snackbar" :timeout="3000">
-    {{ snackbar_text }}
-    <template v-slot:actions>
-      <v-btn color="pink" variant="text" @click="snackbar = false">
-        Close
-      </v-btn>
-    </template>
-  </v-snackbar>
+  <Snackbar
+    :snackbar_text="snackbar_text"
+    :color="color"
+    ref="Snackbar_ref"
+  ></Snackbar>
 </template>
 
 <style lang="scss" scoped></style>

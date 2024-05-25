@@ -1,6 +1,6 @@
 # Vue 3 + TypeScript  Blogs
 
-The front-end source code of the blog project uses the latest technology  ***Vue3 + Tyepscript + Vite + TailWindocss + Thress ...***
+The front-end source code of the blog project uses the latest technology  ***Vue3 + Tyepscript + Vite + TailWindocss + Threejs ...***
 
 
 

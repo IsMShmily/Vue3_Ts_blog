@@ -11,7 +11,10 @@ import "virtual:svg-icons-register";
 import "vuetify/styles";
 import vuetify from "@/plugins/vuetify.js";
 
+import pinia from "@/store/index";
 const app = createApp(App);
+
+app.use(pinia);
 app.use(allComs);
 app.use(router);
 app.use(vuetify);
