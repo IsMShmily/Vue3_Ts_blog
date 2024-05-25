@@ -4,7 +4,7 @@ import { Moon, Sun, EllipsisVertical } from "lucide-vue-next";
 import { ref } from "vue";
 import router from "@/router";
 import { Github, UserRoundPlus, LogOut } from "lucide-vue-next";
-
+import API from "@/api";
 const theme = useTheme();
 const drawer = ref(false);
 const menu = ref(false);
@@ -54,13 +54,58 @@ const userLogin = () => {
 };
 
 /**
- * 注册
+ * @module 注册相关逻辑
  */
 const signInDialog = ref(false);
+const email = ref("");
+const code = ref("");
+const password = ref("");
+const AlignPassword = ref("");
+const snackbar = ref(false);
+const loading = ref(false);
+const snackbar_text = ref("");
+/** 打开提示框 */
 const openSignInDiaog = () => {
   signInDialog.value = true;
 };
-const signIn = () => {};
+/** 发送验证码 */
+const sendCode = async () => {
+  loading.value = true;
+  const res = await API.getCode_AJAX({ email: email.value });
+  loading.value = false;
+  if (res.code == 200) {
+    snackbar_text.value = "发送成功！";
+    snackbar.value = true;
+  } else {
+    snackbar.value = true;
+    snackbar_text.value = `发送失败：${res.msg}`;
+  }
+};
+/** 注册 */
+const register = async () => {
+  if (password.value != AlignPassword.value) {
+    snackbar.value = true;
+    snackbar_text.value = `两次密码不一致`;
+    return;
+  }
+  const res = await API.Login.register_AJAX({
+    email: email.value,
+    code: code.value,
+    password: password.value,
+  });
+  if (res.code == 200) {
+    code.value = "";
+    password.value = "";
+    AlignPassword.value = "";
+    email.value = "";
+    signInDialog.value = false;
+    snackbar_text.value = `注册成功`;
+    snackbar.value = true;
+  } else {
+    snackbar.value = true;
+    snackbar_text.value = `注册失败：${res.msg}`;
+  }
+};
 </script>
 <template>
   <v-app-bar scroll-behavior="elevate">
@@ -231,13 +276,41 @@ const signIn = () => {};
               <div class="text-medium-emphasis mb-4">
                 请输入您的用户名和密码
               </div>
-              <v-text-field hide-details="auto" label="邮箱"></v-text-field>
+              <v-text-field
+                hide-details="auto"
+                v-model="email"
+                label="邮箱"
+                placeholder="johndoe@163.com"
+              ></v-text-field>
             </v-card-text>
             <v-card-text>
-              <v-text-field hide-details="auto" label="密码"></v-text-field
+              <v-text-field
+                v-model="code"
+                :loading="loading"
+                density="compact"
+                label="输入验证码"
+                hide-details="auto"
+              >
+                <template v-slot:append>
+                  <v-btn @click="sendCode">
+                    获取验证码
+                    <template v-slot:append>
+                      <v-icon icon="mdi-email-arrow-right"></v-icon>
+                    </template>
+                  </v-btn>
+                </template>
+              </v-text-field>
+            </v-card-text>
+            <v-card-text>
+              <v-text-field
+                v-model="password"
+                hide-details="auto"
+                label="密码"
+              ></v-text-field
             ></v-card-text>
             <v-card-text>
               <v-text-field
+                v-model="AlignPassword"
                 hide-details="auto"
                 label="再次输入密码"
               ></v-text-field
@@ -250,7 +323,7 @@ const signIn = () => {};
                 class="text-none"
                 rounded="xl"
                 text="注册"
-                @click="signIn"
+                @click="register"
               ></v-btn>
             </v-card-actions>
           </v-card>
@@ -258,6 +331,16 @@ const signIn = () => {};
       </v-dialog>
     </template>
   </v-dialog>
+
+  <!-- 提示 -->
+  <v-snackbar v-model="snackbar" :timeout="3000">
+    {{ snackbar_text }}
+    <template v-slot:actions>
+      <v-btn color="pink" variant="text" @click="snackbar = false">
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 <style lang="scss" scoped>
 .logo {
