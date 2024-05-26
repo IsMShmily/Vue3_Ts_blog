@@ -8,7 +8,7 @@ import Login from "./Login.vue";
 import createUserStore from "@/store/modules/user";
 
 const userStore = createUserStore();
-const userInfo = userStore.userInfo;
+const { userInfo } = userStore;
 const theme = useTheme();
 const drawer = ref(false);
 const menu = ref(false);
@@ -39,7 +39,9 @@ const jumpRouter = (item: any) => {
   menu.value = false;
   router.push(item.value);
 };
-const goOut = () => {};
+const goOut = () => {
+  userStore.delUserInfo();
+};
 /**
  * @description: 切换主题
  * @return {*}

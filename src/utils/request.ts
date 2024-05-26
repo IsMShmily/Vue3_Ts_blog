@@ -17,6 +17,9 @@ const request: AxiosInstance = axios.create({
 
 // 请求拦截器
 request.interceptors.request.use((config: any) => {
+  config.headers = {
+    token: localStorage.getItem("token") || "",
+  };
   return config;
 });
 
