@@ -1,9 +1,8 @@
 @import "./reset.scss";
 @import "./variable.scss";
 @import "./mixins.scss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "./twilwind.css";
+
 /* 隐藏垂直滚动条 */
 body::-webkit-scrollbar {
   width: 0.5em;

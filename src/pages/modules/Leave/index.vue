@@ -72,7 +72,7 @@ onMounted(() => {
             </template>
             <v-card-text class="py-2"> {{ i.createdAt }} </v-card-text>
 
-            <v-card-text class="py-2">
+            <v-card-text class="text_hide_two min-h-17">
               {{ i.content }}
             </v-card-text>
 

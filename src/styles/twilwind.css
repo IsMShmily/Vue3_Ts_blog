@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-black-50 {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+  }
+  .text-hide-one {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .text_hide_two {
+    -webkit-line-clamp: 2;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 15px;
+  }
+  .min-h-17 {
+    min-height: 4.8rem /* 64px */;
+  }
+}

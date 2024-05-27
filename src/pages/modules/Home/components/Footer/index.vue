@@ -33,7 +33,7 @@ const list = [
       Copyright ©2024 by @shmily_yy All rights reserved ·
       <a href="https://beian.miit.gov.cn">浙ICP备2024087931号-1</a>
     </div>
-    <div class="flex justify-center font-bold mt-1 flex-wrap">
+    <!-- <div class="flex justify-center font-bold mt-1 flex-wrap">
       <div
         class="flex items-center ml-5 rounded-md p-0.5"
         v-for="item in list"
@@ -42,7 +42,7 @@ const list = [
         <SvgIcon :name="item.icon" size="17" color="#000"></SvgIcon>
         <div class="text-xs ml-1">{{ item.name }}</div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <style lang="scss" scoped></style>

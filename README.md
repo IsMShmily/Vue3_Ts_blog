@@ -18,6 +18,8 @@ The front-end source code of the blog project uses the latest technology  ***Vue
 
 `CSDN homepage`：<a>https://blog.csdn.net/shmilynn_?spm=1001.2014.3001.5343</a>
 
+`GitHub homepage`：<a>https://blog.csdn.net/shmilynn_?spm=1001.2014.3001.5343</a>
+
 ---
 ###  TypeScript gymnastics series
 - [TS为什么被叫做类型体操](https://blog.csdn.net/shmilynn_/article/details/137981157?spm=1001.2014.3001.5502)

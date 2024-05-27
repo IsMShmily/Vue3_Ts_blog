@@ -19,6 +19,7 @@ const contentRules = [
     if (value?.length > 0) return true;
     return "留言消息不能为空";
   },
+  (v: any) => v.length <= 50 || "留言消息不能超过50个字符",
 ];
 
 /** 发送消息 */
@@ -60,6 +61,7 @@ defineExpose({
           label="留言消息"
           rows="1"
           variant="filled"
+          counter
           auto-grow
         ></v-textarea>
       </v-form>

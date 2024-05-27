@@ -1,17 +1,30 @@
 @mixin center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin b_center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin text_hide {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text_hide_more($line) {
+  @if ($line) {
+    -webkit-line-clamp: $line; /* 超出几行省略 */
+  } @else {
+    -webkit-line-clamp: 1;
   }
-  @mixin b_center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  @mixin text_hide {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 18px;
+}

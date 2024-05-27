@@ -68,7 +68,7 @@ const userLogin = () => {
       <v-toolbar-title class="">
         <div class="flex items-center">
           <img src="/logo.png" class="rounded-full w-10" alt="" />
-          <div class="ml-3 font-bold cursor-pointer">shmily_yy 博客</div>
+          <div class="ml-3 font-bold cursor-pointer">shmily_yy blog</div>
         </div>
       </v-toolbar-title>
 

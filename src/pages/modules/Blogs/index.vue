@@ -69,17 +69,19 @@ onMounted(() => {
                     src="https://img2.baidu.com/it/u=808485391,814342496&fm=253&fmt=auto&app=138&f=JPEG?w=1235&h=800"
                     cover
                   >
-                    <v-card-title>{{ i.title }}</v-card-title>
+                    <v-card-title
+                      ><div class="text-hide-one">
+                        {{ i.title }}
+                      </div></v-card-title
+                    >
                   </v-img>
                   <v-card-subtitle class="pt-4">
                     {{ i.createdAt }}
                   </v-card-subtitle>
-                  <v-card-text>
-                    <div>
-                      {{ i.brief }}
-                    </div>
+                  <v-card-text class="text-hide-one ">
+                    {{ i.brief }}
                   </v-card-text>
-                  <v-card-actions>
+                  <v-card-actions class="justify-end">
                     <v-btn>
                       <SvgIcon name="love" size="20"></SvgIcon>
                       <div class="ml-1 text-xs font-bold">{{ i.praise }}</div>
