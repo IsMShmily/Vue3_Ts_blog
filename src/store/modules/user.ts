@@ -1,25 +1,25 @@
 import { defineStore } from "pinia";
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import type { login_res } from "@/api/backend/user/type";
 import {
   getTokenStorage,
   setTokenStorage,
   removeTokenStorage,
-  getUserStorage,
   setUserStorage,
   removeUserStorage,
+  getUserStorage,
 } from "@/utils/storage";
 
-let createUserStore = defineStore("user", () => {
+const useUserStore = defineStore("user", () => {
   const token = ref(getTokenStorage() ? getTokenStorage() : null);
-  const userInfo = reactive(
-    getUserStorage() ? JSON.parse(getUserStorage()!) : null
-  );
+  let userInfo = ref(getUserStorage() ? JSON.parse(getUserStorage()!) : null);
 
   /** 储存用户信息 */
   const setUserInfo = async (info: login_res) => {
+    console.log(info);
     setTokenStorage(info.token);
     setUserStorage(info);
+    token.value = info.token;
     userInfo.value = info;
   };
 
@@ -39,4 +39,4 @@ let createUserStore = defineStore("user", () => {
   };
 });
 
-export default createUserStore;
+export default useUserStore;

@@ -3,12 +3,13 @@ import { useTheme } from "vuetify";
 import { Moon, Sun, EllipsisVertical } from "lucide-vue-next";
 import { ref } from "vue";
 import router from "@/router";
+import { storeToRefs } from "pinia";
 import { Github, UserRoundPlus, LogOut } from "lucide-vue-next";
 import Login from "./Login.vue";
-import createUserStore from "@/store/modules/user";
+import useUserStore from "@/store/modules/user";
 
-const userStore = createUserStore();
-const { userInfo } = userStore;
+const userStore = useUserStore();
+const { userInfo, token } = storeToRefs(userStore);
 const theme = useTheme();
 const drawer = ref(false);
 const menu = ref(false);
@@ -106,10 +107,10 @@ const userLogin = () => {
         <v-card min-width="280">
           <v-list>
             <v-list-item
-              v-if="userInfo"
-              :prepend-avatar="userInfo.avatar"
+              v-if="token"
+              :prepend-avatar="userInfo?.avatar"
               subtitle="欢迎来到shmily_yy的博客"
-              :title="userInfo.userName"
+              :title="userInfo?.userName"
             >
               <template v-slot:append>
                 <v-btn variant="text" @click="goOut">
@@ -118,7 +119,7 @@ const userLogin = () => {
               </template>
             </v-list-item>
             <v-list-item v-else class="text-center">
-              <v-list-item-title>选择登录方式</v-list-item-title>
+              <v-list-item-title>选择登录方式 {{ token }}</v-list-item-title>
               <v-list-item-title class="mt-3">
                 <v-btn-toggle variant="outlined">
                   <v-btn variant="text">

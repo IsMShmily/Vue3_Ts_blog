@@ -6,12 +6,12 @@ import { ref } from "vue";
 import Register from "./register.vue";
 import API from "@/api";
 import Snackbar from "@/components/basic/Snackbar/index.vue";
-import createUserStore from "@/store/modules/user";
+import useUserStore from "@/store/modules/user";
 
 const LoginDialogstatus = ref(false);
-const userStore = createUserStore();
 const Register_ref = ref();
 const color = ref("");
+
 const openSignInDiaog = () => {
   Register_ref.value.signInDialog = true;
 };
@@ -30,7 +30,7 @@ const login = async () => {
     color.value = "success";
     email.value = "";
     password.value = "";
-    userStore.setUserInfo(res.data);
+    await useUserStore().setUserInfo(res.data);
     LoginDialogstatus.value = false;
   } else {
     color.value = "error";
