@@ -22,4 +22,6 @@
 
 - 退出增加确认dialog([29041ca711c36f370dea5dc2268ab4c41d85248b](https://github.com/IsMShmily/Vue3_Ts_blog/tree/29041ca711c36f370dea5dc2268ab4c41d85248b))
 
+- github 登录逻辑编写([985a5fc9e9b7e4c4beeb925b7ccfb004d260eae9](https://github.com/IsMShmily/Vue3_Ts_blog/tree/985a5fc9e9b7e4c4beeb925b7ccfb004d260eae9))
+
 ### Performance Improvements
