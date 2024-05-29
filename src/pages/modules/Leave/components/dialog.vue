@@ -29,10 +29,10 @@ const sendMessage = async () => {
   });
   if (res.code == 200) {
     visable.value = false;
-    content.value = "";
     snackbar_text.value = "留言成功！";
     Snackbar_ref.value.visable = true;
     emits("updataList");
+    content.value = "";
   } else {
     snackbar_text.value = res.msg;
     Snackbar_ref.value.visable = true;

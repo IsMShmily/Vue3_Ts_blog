@@ -43,7 +43,7 @@ const getList = async () => {
   const res = await API.Blogs.get_blogs_list_AXJAX({
     categoryId: tabActive.value == 0 ? null : tabActive.value,
     page: page.value,
-    size: 10,
+    size: 9,
     userId: userStore.userInfo?.id,
   });
   list.value = res.data.records;
@@ -136,7 +136,7 @@ onMounted(() => {
           <v-pagination
             @update:modelValue="pageChange"
             v-model="page"
-            :length="Math.ceil(total / 10)"
+            :length="Math.ceil(total / 9)"
             class="my-4"
             :total-visible="7"
           ></v-pagination>

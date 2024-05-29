@@ -14,12 +14,18 @@ const dialog_ref = ref();
 
 /** @module 留言列表 */
 const list = ref<get_message_res["records"]>([]);
+const total = ref(0);
 const getMessageList = async () => {
   const res = await API.Message.get_message_list_AJAX({
     page: page.value,
-    size: 10,
+    size: 9,
   });
+  total.value = res.data.total;
   list.value = res.data.records;
+};
+const pageChange = (val: number) => {
+  page.value = val;
+  getMessageList();
 };
 onMounted(() => {
   getMessageList();
@@ -99,7 +105,13 @@ onMounted(() => {
         </v-col>
       </v-row>
       <div class="flex justify-end">
-        <v-pagination v-model="page" :length="3" class=""></v-pagination>
+        <v-pagination
+          @update:modelValue="pageChange"
+          v-model="page"
+          :length="Math.ceil(total / 9)"
+          class="my-4"
+          :total-visible="7"
+        ></v-pagination>
       </div>
     </v-container>
 
