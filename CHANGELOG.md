@@ -12,4 +12,6 @@
 
 - 博客详情页编写([1efbc593fd22fc10f5ee2f89a47fc250705ec89f](https://github.com/IsMShmily/Vue3_Ts_blog/tree/1efbc593fd22fc10f5ee2f89a47fc250705ec89f))
 
+- 注册校验增加,ui优化([a3e4b5eb035178871099f6e7a0619fc27807b03c](https://github.com/IsMShmily/Vue3_Ts_blog/tree/a3e4b5eb035178871099f6e7a0619fc27807b03c))
+
 ### Performance Improvements
