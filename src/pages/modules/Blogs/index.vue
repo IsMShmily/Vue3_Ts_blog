@@ -37,7 +37,7 @@ const tabChange = () => {
 const loading = ref(true);
 const page = ref(1);
 const list = ref<get_blogs_list_res["records"]>([]);
-
+const total = ref(0);
 /** 获取文章列表 */
 const getList = async () => {
   const res = await API.Blogs.get_blogs_list_AXJAX({
@@ -47,6 +47,7 @@ const getList = async () => {
     userId: userStore.userInfo?.id,
   });
   list.value = res.data.records;
+  total.value = res.data.total;
   loading.value = false;
 };
 
@@ -63,6 +64,11 @@ const love = async (id: number) => {
   if (res.code == 200) {
     getList();
   }
+};
+
+const pageChange = (val: number) => {
+  page.value = val;
+  getList();
 };
 onMounted(() => {
   getList();
@@ -103,7 +109,7 @@ onMounted(() => {
                     cover
                   >
                     <v-card-title class="bg-black-50"
-                      ><div class="text-hide-one ">
+                      ><div class="text-hide-one">
                         {{ i.title }}
                       </div></v-card-title
                     >
@@ -127,7 +133,13 @@ onMounted(() => {
               </v-card>
             </v-col>
           </v-row>
-          <v-pagination v-model="page" :length="5" class="my-4"></v-pagination>
+          <v-pagination
+            @update:modelValue="pageChange"
+            v-model="page"
+            :length="Math.ceil(total / 10)"
+            class="my-4"
+            :total-visible="7"
+          ></v-pagination>
         </v-container>
       </v-window-item>
     </v-window>

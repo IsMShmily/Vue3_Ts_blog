@@ -14,4 +14,6 @@
 
 - 注册校验增加,ui优化([a3e4b5eb035178871099f6e7a0619fc27807b03c](https://github.com/IsMShmily/Vue3_Ts_blog/tree/a3e4b5eb035178871099f6e7a0619fc27807b03c))
 
+- 登录增加校验([570c0579e0ded5126a4b7f6063778fa3f1f4bb49](https://github.com/IsMShmily/Vue3_Ts_blog/tree/570c0579e0ded5126a4b7f6063778fa3f1f4bb49))
+
 ### Performance Improvements
