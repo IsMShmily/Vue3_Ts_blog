@@ -4,7 +4,7 @@
 
 - 修复登录后需要刷新才会更新状态的bug ([f7b392787c8fc6e69b0da94b40110fd11e87e10bb260cdd2203f48beb](https://github.com/IsMShmily/Vue3_Ts_blog/commit/f7b392787c8fc6e69b0da94b40110fd11e87e10bb260cdd2203f48beb))
 
-- 优化博客,消息列表展示 ([de4f9a7f9ebdce7cc73fd13efaeb36178df82535](https://github.com/IsMShmily/Vue3_Ts_blog/commit/de4f9a7f9ebdce7cc73fd13efaeb36178df82535))
+- 博客,消息列表分页修改 ([de4f9a7f9ebdce7cc73fd13efaeb36178df82535](https://github.com/IsMShmily/Vue3_Ts_blog/commit/de4f9a7f9ebdce7cc73fd13efaeb36178df82535))
 
 ### Features
 
@@ -19,5 +19,7 @@
 - 登录增加校验([570c0579e0ded5126a4b7f6063778fa3f1f4bb49](https://github.com/IsMShmily/Vue3_Ts_blog/tree/570c0579e0ded5126a4b7f6063778fa3f1f4bb49))
 
 - blogs列表分页逻辑([034c26a24c08b4ffed321338bd0028abd97cd51f](https://github.com/IsMShmily/Vue3_Ts_blog/tree/034c26a24c08b4ffed321338bd0028abd97cd51f))
+
+- 退出增加确认dialog([29041ca711c36f370dea5dc2268ab4c41d85248b](https://github.com/IsMShmily/Vue3_Ts_blog/tree/29041ca711c36f370dea5dc2268ab4c41d85248b))
 
 ### Performance Improvements
