@@ -221,81 +221,7 @@ const createBall = async () => {
     body,
   });
 };
-const guiObj1 = {
-  createSphere() {
-    createBall();
-  },
-};
-console.log(guiObj1);
-// gui.add(guiObj1, "createSphere");
 
-// --------------------------------------
-
-/**
- * 创建glb模型
- */
-// const gltfLoader = new GLTFLoader();
-// let fbxLoader = new FBXLoader();
-// let mixer: any;
-// const createGlbModel = async () => {
-//   // 创建灯光
-//   const light = new THREE.AmbientLight(0xffffff, 3);
-//   scene.add(light);
-
-//   // 加载glb模型
-//   const glb = await gltfLoader.loadAsync("/src/assets/glb/my.glb");
-//   figureModel = glb.scene;
-//   figureModel.scale.set(2, 2, 2);
-//   figureModel.position.set(10, 3, -15);
-//   figureModel.rotation.set(0, 0.7, 0);
-//   group.add(figureModel);
-
-//   const Walking = await fbxLoader.loadAsync("/src/assets/glb/Walking.fbx");
-//   console.log(
-//     "%c  fbx - object ：加载fbx成功object*****************************",
-//     "color: green;",
-//     Walking
-//   );
-//   mixer = new THREE.AnimationMixer(figureModel);
-//   console.log(Walking.animations[0]);
-//   const action = mixer.clipAction(Walking.animations[0]);
-//   console.log(action);
-//   action.enabled = true;
-//   action.setEffectiveTimeScale(1);
-//   action.setEffectiveWeight(1);
-//   action.play();
-// };
-/**
- * 移动到关于我
- */
-const moveAboutAnimation = throttle(() => {
-  controls.enabled = false;
-  let target = controls.target;
-  let position = camera.position;
-  new TWEEN.Tween({
-    xt1: target.x,
-    yt1: target.y,
-    zt1: target.z,
-    x2: position.x,
-    y2: position.y,
-    z2: position.z,
-  })
-    .easing(TWEEN.Easing.Quadratic.InOut)
-    .to({ xt1: 13, yt1: 5, zt1: -15, x2: 25, y2: 7, z2: 0 }, 3000)
-    .easing(TWEEN.Easing.Quadratic.Out)
-    .onUpdate((object) => {
-      let { xt1, yt1, zt1, x2, y2, z2 } = object;
-      controls.target.set(xt1, yt1, zt1); // 控制器的焦点
-      camera.position.set(x2, y2, z2); // 相机位置
-      controls.update();
-    })
-    .onComplete(() => {
-      controls.enabled = true;
-    })
-    .start();
-  return;
-}, 1000);
-console.log(moveAboutAnimation);
 /**
  * 创建地面
  */
@@ -400,7 +326,6 @@ const createGround = async () => {
   const directionLight = new THREE.DirectionalLight();
   directionLight.castShadow = true;
   directionLight.position.set(4, 5, 0);
-
   const ambientLight = new THREE.AmbientLight(new THREE.Color("#ffffff"), 0.4);
   const directionLightHelper = new THREE.DirectionalLightHelper(
     directionLight,
@@ -457,8 +382,6 @@ onMounted(async () => {
     group,
     scene
   );
-
-  // createGlbModel();
   render();
 });
 
@@ -467,7 +390,7 @@ window.addEventListener("click", (e) => {
   // 触摸
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-  console.log(mouse);
+
   // 通过摄像机和鼠标位置更新射线
   raycaster.setFromCamera(mouse, camera);
   // 我们可以放场景中所有的模型，也可以放置指定模型数组
@@ -477,7 +400,6 @@ window.addEventListener("click", (e) => {
       MoveMainAnimation();
     }
     if (item.object.uuid == "technology") {
-      console.log("点击了技术");
       // moveTechnologyAnimation();
     }
     if (item.object.uuid == "about") {
@@ -509,11 +431,9 @@ window.addEventListener("touchstart", (e) => {
       MoveMainAnimation();
     }
     if (item.object.uuid == "technology") {
-      // moveTechnologyAnimation();
     }
     if (item.object.uuid == "about") {
       router.push("/chat");
-      // console.log("点击了关于");
       // moveAboutAnimation();
     }
   });
@@ -527,9 +447,7 @@ let isUp = false,
   isLeft = false,
   isRight = false,
   isJump = false;
-console.log(isJump);
 window.addEventListener("keydown", (e) => {
-  console.log(e.code);
   switch (e.code) {
     case "KeyW":
       console.log("前进");
@@ -556,7 +474,6 @@ window.addEventListener("keydown", (e) => {
 });
 
 window.addEventListener("keyup", (e) => {
-  console.log(e.code);
   switch (e.code) {
     case "KeyW":
       isUp = false;
@@ -572,17 +489,6 @@ window.addEventListener("keyup", (e) => {
       break;
     case "Space":
       isJump = false;
-
-      // ball.position.set(0, 0.5, 0);
-      // // cube.rotation.set(0, 0, 0)
-      // ball.quaternion.set(0, 0, 0, 0);
-
-      // ball.position.set(0, 0.5, 0);
-      // // robotModel.rotation.set(0, 0, 0)
-      // ball.quaternion.set(0, 0, 0, 0);
-
-      // camera.position.set(0, 5, 10);
-      // camera.lookAt(0, 0, 0);
       break;
   }
 });

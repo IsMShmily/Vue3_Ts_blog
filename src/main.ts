@@ -4,6 +4,25 @@ import router from "@/router";
 import allComs from "@/components";
 import "./styles/index.scss";
 
+/** highlight 高亮相关 */
+import "highlight.js/styles/atom-one-dark.css";
+import hljs from "highlight.js/lib/core";
+import hljsVuePlugin from "@highlightjs/vue-plugin";
+import "highlight.js/lib/common";
+
+/** kangc markdown */
+import VMdEditor from "@kangc/v-md-editor";
+import VMdPreview from '@kangc/v-md-editor/lib/preview';
+import "@kangc/v-md-editor/lib/style/base-editor.css";
+import githubTheme from "@kangc/v-md-editor/lib/theme/github.js";
+import "@kangc/v-md-editor/lib/theme/style/github.css";
+VMdEditor.use(githubTheme, {
+  Hljs: hljs,
+});
+VMdPreview.use(githubTheme, {
+    Hljs: hljs,
+  });
+  
 //svg插件引入使用
 import "virtual:svg-icons-register";
 
@@ -14,6 +33,17 @@ import vuetify from "@/plugins/vuetify.js";
 import pinia from "@/store/index";
 const app = createApp(App);
 
+/** 注册自定义指令 */
+app.directive("highlight", function (el) {
+  let highlight = el.querySelectorAll("pre code");
+  highlight.forEach((block: any) => {
+    hljs.highlightElement(block);
+  });
+});
+
+app.use(VMdEditor);
+app.use(VMdPreview);
+app.use(hljsVuePlugin);
 app.use(pinia);
 app.use(allComs);
 app.use(router);

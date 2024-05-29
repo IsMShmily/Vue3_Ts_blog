@@ -2,6 +2,8 @@
 import { onMounted, ref } from "vue";
 import API from "@/api";
 import { get_blogs_list_res } from "@/api/backend/blogs/type";
+import dayjs from "dayjs";
+import router from "@/router";
 
 const model = ref(null);
 const list = ref<get_blogs_list_res["records"]>([]);
@@ -14,6 +16,10 @@ const getList = async () => {
     size: 10,
   });
   list.value = res.data.records;
+};
+
+const godetail = (id:number) => {
+  router.push('/blogsDetail?id='+id)
 };
 onMounted(() => {
   getList();
@@ -39,11 +45,13 @@ onMounted(() => {
           @click="toggle"
         >
           <img
-            src="@/assets/logo.png"
+            :src="n.thumbnail"
             class="w-100 h-100 absolute left-0 right-0 z-0"
             lt=""
           />
-          <div class="absolute left-0 bottom-0 z-10 w-full px-3 py-3 bg-black-50">
+          <div
+            class="absolute left-0 bottom-0 z-10 w-full px-3 py-3 bg-black-50"
+          >
             <div>{{ n.title }}</div>
           </div>
 
@@ -68,10 +76,12 @@ onMounted(() => {
             {{ list[model].brief }}
           </div>
           <div class="self-end mr-15">
-            <v-btn variant="text">去详情 </v-btn>
+            <v-btn variant="text" @click="godetail(list[model].id)"
+              >去详情
+            </v-btn>
           </div>
           <div class="self-end mr-15">
-            {{ list[model].createdAt }}
+            {{ dayjs(list[model]?.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
           </div>
         </div>
       </v-sheet>

@@ -15,6 +15,8 @@
     }
   },
   "dependencies": {
+    "@highlightjs/vue-plugin": "^2.1.0",
+    "@kangc/v-md-editor": "^2.3.18",
     "@types/axios": "^0.14.0",
     "@types/cannon": "^0.1.12",
     "@types/three": "^0.164.0",
@@ -23,6 +25,9 @@
     "cannon": "^0.6.2",
     "cannon-es": "^0.20.0",
     "cannon-es-debugger": "^1.0.0",
+    "codemirror": "^6.0.1",
+    "dayjs": "^1.11.11",
+    "highlight.js": "^11.9.0",
     "html2canvas": "^1.4.1",
     "lucide-vue-next": "^0.376.0",
     "pinia": "^2.1.7",

@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import { get_message_res } from "@/api/backend/message/type";
 import API from "@/api";
+import dayjs from "dayjs";
 const list = ref<get_message_res["records"]>([]);
 const getMessageList = async () => {
   const res = await API.Message.get_message_list_AJAX({
@@ -29,7 +30,9 @@ onMounted(() => {
               i.user.username
             }}</v-list-item-title>
           </template>
-          <v-card-text class="py-2"> {{ i.createdAt }} </v-card-text>
+          <v-card-text class="py-2">
+            {{ dayjs(i?.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
+          </v-card-text>
 
           <v-card-text class="py-2 min-h-17">
             {{ i.content }}
@@ -38,16 +41,15 @@ onMounted(() => {
           <v-card-actions>
             <v-list-item class="w-100">
               <template v-slot:append>
-                <div class="justify-self-end">
-                  <v-icon class="me-1" size="17" icon="mdi-heart"></v-icon>
-                  <span class="subheading me-2">{{ i.praise }}</span>
-                  <span class="me-1">·</span>
-                  <v-icon
-                    class="me-1"
-                    size="17"
-                    icon="mdi-share-variant"
-                  ></v-icon>
-                  <span class="subheading">45</span>
+                <div class="justify-self-end flex items-center">
+                  <SvgIcon name="xt" size="18" class="mr-2"></SvgIcon>
+                  <span class="font-bold text-xs subheading me-2">{{
+                    i.os
+                  }}</span>
+                  <span class="font-bold text-xs me-1">·</span>
+                  <span class="font-bold text-xs subheading me-2">{{
+                    i.Browser
+                  }}</span>
                 </div>
               </template>
             </v-list-item>

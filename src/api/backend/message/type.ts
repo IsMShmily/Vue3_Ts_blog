@@ -16,6 +16,9 @@ export type get_message_res = {
     userId: string;
     createdAt: string;
     updatedAt: string;
+    os: string;
+    Browser: string;
+    IP: string;
     user: {
       username: string;
       avatar: string;

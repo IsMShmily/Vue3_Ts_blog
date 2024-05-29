@@ -30,7 +30,7 @@
   content: attr(content);
   position: absolute;
   inset: 0;
-  transform: rotatex(180deg) translatey(4px) translateX(0px);
+  transform: rotatex(180deg) translatey(-1px) translateX(0px);
   transform-origin: 50% 100%;
   filter: blur(0.8px) brightness(1.5);
 }

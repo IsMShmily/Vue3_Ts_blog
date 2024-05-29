@@ -29,11 +29,11 @@ const items = [
     value: "leave",
     icon: "Send",
   },
-  {
-    title: "我的",
-    value: "chat",
-    icon: "Users",
-  },
+  // {
+  //   title: "我的",
+  //   value: "chat",
+  //   icon: "Users",
+  // },
 ];
 const jumpRouter = (item: any) => {
   menu.value = false;
@@ -107,7 +107,7 @@ const userLogin = () => {
           <v-list>
             <v-list-item
               v-if="userInfo"
-              prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
+              :prepend-avatar="userInfo.avatar"
               subtitle="欢迎来到shmily_yy的博客"
               :title="userInfo.userName"
             >

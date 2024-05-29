@@ -30,7 +30,7 @@ const login = async () => {
     color.value = "success";
     email.value = "";
     password.value = "";
-    userStore.setUserInfo(res.data)
+    userStore.setUserInfo(res.data);
     LoginDialogstatus.value = false;
   } else {
     color.value = "error";
@@ -50,7 +50,6 @@ defineExpose({
       <v-card rounded="lg">
         <v-card-title class="d-flex justify-space-between align-center">
           <div class="text-h5 text-medium-emphasis ps-2">登录您的账号</div>
-
           <v-btn
             icon="mdi-close"
             variant="text"

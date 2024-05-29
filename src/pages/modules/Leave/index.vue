@@ -6,6 +6,7 @@ import API from "@/api";
 import { get_message_res } from "@/api/backend/message/type";
 import Dialog from "./components/dialog.vue";
 import createUserStore from "@/store/modules/user";
+import dayjs from "dayjs";
 
 const userStore = createUserStore();
 const page = ref(1);
@@ -51,8 +52,8 @@ onMounted(() => {
                 >
                   <template v-slot:prepend> <Send :size="13" /></template>
 
-                  留个言</v-btn
-                ></v-card-text
+                  {{ !userStore.userInfo ? "登录后即可留言" : "留个言" }}
+                </v-btn></v-card-text
               >
             </v-img>
           </v-card>
@@ -70,7 +71,9 @@ onMounted(() => {
                 i.user.username
               }}</v-list-item-title>
             </template>
-            <v-card-text class="py-2"> {{ i.createdAt }} </v-card-text>
+            <v-card-text class="py-2">
+              {{ dayjs(i?.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
+            </v-card-text>
 
             <v-card-text class="text_hide_two min-h-17">
               {{ i.content }}
@@ -79,16 +82,15 @@ onMounted(() => {
             <v-card-actions>
               <v-list-item class="w-100">
                 <template v-slot:append>
-                  <div class="justify-self-end">
-                    <v-icon class="me-1" size="17" icon="mdi-heart"></v-icon>
-                    <span class="subheading me-2">{{ i.praise }}</span>
-                    <span class="me-1">·</span>
-                    <v-icon
-                      class="me-1"
-                      size="17"
-                      icon="mdi-share-variant"
-                    ></v-icon>
-                    <span class="subheading">45</span>
+                  <div class="justify-self-end flex items-center">
+                    <SvgIcon name="xt" size="18" class="mr-2"></SvgIcon>
+                    <span class="font-bold text-xs subheading me-2">{{
+                      i.os
+                    }}</span>
+                    <span class="font-bold text-xs me-1">·</span>
+                    <span class="font-bold text-xs subheading me-2">{{
+                      i.Browser
+                    }}</span>
                   </div>
                 </template>
               </v-list-item>
