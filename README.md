@@ -16,7 +16,7 @@ The front-end source code of the blog project uses the latest technology **_Vue3
 
 `CSDN homepage`：<a>https://blog.csdn.net/shmilynn_?spm=1001.2014.3001.5343</a>
 
-`GitHub homepage`：<a>https://blog.csdn.net/shmilynn_?spm=1001.2014.3001.5343</a>
+`GitHub homepage`：<a>https://github.com/IsMShmily</a>
 
 ---
 
