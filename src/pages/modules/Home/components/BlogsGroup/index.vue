@@ -52,7 +52,7 @@ onMounted(() => {
           <div
             class="absolute left-0 bottom-0 z-10 w-full px-3 py-3 bg-black-50"
           >
-            <div>{{ n.title }}</div>
+            <div class="text-hide-one">{{ n.title }}</div>
           </div>
 
           <div class="d-flex fill-height align-center justify-center">

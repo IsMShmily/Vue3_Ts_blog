@@ -13,7 +13,7 @@ const { userInfo, token } = storeToRefs(userStore);
 const theme = useTheme();
 const drawer = ref(false);
 const menu = ref(false);
-
+const dialog = ref(false);
 const items = [
   {
     title: "主页",
@@ -42,6 +42,7 @@ const jumpRouter = (item: any) => {
 };
 const goOut = () => {
   userStore.delUserInfo();
+  dialog.value = false;
 };
 /**
  * @description: 切换主题
@@ -113,9 +114,26 @@ const userLogin = () => {
               :title="userInfo?.userName"
             >
               <template v-slot:append>
-                <v-btn variant="text" @click="goOut">
-                  <LogOut :size="16"
-                /></v-btn>
+                <v-dialog v-model="dialog" max-width="400" persistent>
+                  <template v-slot:activator="{ props: activatorProps }">
+                    <v-btn variant="text" v-bind="activatorProps">
+                      <LogOut :size="16"
+                    /></v-btn>
+                  </template>
+
+                  <v-card
+                    prepend-icon="mdi-logout-variant"
+                    title="你确定要退出登录吗？"
+                  >
+                    <template v-slot:actions>
+                      <v-spacer></v-spacer>
+
+                      <v-btn @click="dialog = false"> 取消 </v-btn>
+
+                      <v-btn @click="goOut"> 确认 </v-btn>
+                    </template>
+                  </v-card>
+                </v-dialog>
               </template>
             </v-list-item>
             <v-list-item v-else class="text-center">

@@ -4,6 +4,8 @@
 
 - 修复登录后需要刷新才会更新状态的bug ([f7b392787c8fc6e69b0da94b40110fd11e87e10bb260cdd2203f48beb](https://github.com/IsMShmily/Vue3_Ts_blog/commit/f7b392787c8fc6e69b0da94b40110fd11e87e10bb260cdd2203f48beb))
 
+- 优化博客,消息列表展示 ([de4f9a7f9ebdce7cc73fd13efaeb36178df82535](https://github.com/IsMShmily/Vue3_Ts_blog/commit/de4f9a7f9ebdce7cc73fd13efaeb36178df82535))
+
 ### Features
 
 - 注册登录组件抽离,注册登录逻辑编写,userStore仓库逻辑编写([73bbbfb5f4fa81db658010904bbc394f38e44e47](https://github.com/IsMShmily/Vue3_Ts_blog/commit/73bbbfb5f4fa81db658010904bbc394f38e44e47))
