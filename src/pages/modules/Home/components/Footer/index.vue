@@ -4,11 +4,13 @@ const list = [
     name: "Vue3",
     icon: "csdn",
     href: "https://blog.csdn.net/shmilynn_",
+    tip: "前往csdn主页",
   },
   {
     name: "Ts",
     icon: "github",
     href: "https://github.com/IsMShmily",
+    tip: "前往github主页",
   },
   // {
   //   name: "Tailwind",
@@ -39,6 +41,9 @@ const list = [
           :key="item.name"
         >
           <a :href="item.href">
+            <v-tooltip activator="parent" location="top">{{
+              item.tip
+            }}</v-tooltip>
             <SvgIcon :name="item.icon" size="20" color="#000"></SvgIcon>
           </a>
         </div>

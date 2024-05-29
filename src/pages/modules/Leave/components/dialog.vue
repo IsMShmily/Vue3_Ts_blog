@@ -48,13 +48,8 @@ defineExpose({
     <v-card class="px-5 py-5" min-width="330" max-width="600">
       <div class="mb-2 text-xl">留言</div>
       <div class="mb-3 text-xs">在留言簿中留下您的意见和见解</div>
-      <v-form
-        fast-fail
-        @submit.prevent
-        class="w-full"
-        ref="form"
-        v-model="isValid"
-      >
+
+      <v-form class="w-full" v-model="isValid">
         <v-textarea
           v-model="content"
           :rules="contentRules"
@@ -65,10 +60,12 @@ defineExpose({
           auto-grow
         ></v-textarea>
       </v-form>
+
       <template v-slot:actions>
         <v-btn class="ms-auto" @click="sendMessage" :disabled="!isValid">
-          <template v-slot:prepend> <Send :size="13" /></template>
-
+          <template v-slot:append>
+            <v-icon icon="mdi-send-check-outline"></v-icon
+          ></template>
           发送</v-btn
         >
       </template>
