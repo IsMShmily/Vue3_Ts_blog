@@ -13,7 +13,8 @@ const fontLoader = new FontLoader(); //文字加载器
  */
 const useCreateFont = (group: THREE.Group, textTure: THREE.Texture) => {
   fontLoader.load(
-    "/src/assets/fonts/Fira Code Medium_Regular.json",
+    // 传入json文件
+    "/text.json",
     // onLoad回调
     (font: any) => {
       const textGeometry1 = new TextGeometry("Welcome to", {

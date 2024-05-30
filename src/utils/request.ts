@@ -11,7 +11,7 @@ type RequestMethod = "GET" | "POST" | "PUT" | "DELETE";
 
 const request: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
-  timeout: 7000,
+  timeout: 10000,
   validateStatus: (status: number) => status >= 200 && status < 300, // 默认的
 });
 

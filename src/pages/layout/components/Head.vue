@@ -14,6 +14,7 @@ const theme = useTheme();
 const drawer = ref(false);
 const menu = ref(false);
 const dialog = ref(false);
+
 const items = [
   {
     title: "主页",
@@ -56,23 +57,69 @@ const toggleTheme = () => {
  * 用户登录
  */
 const Login_ref = ref();
+const overlay = ref(false);
+const githubLoadingText = ref("");
+const prodStatus = import.meta.env.NODE_ENV == "prod";
 const userLogin = () => {
   Login_ref.value.LoginDialogstatus = true;
 };
 const githubLogin = async (code: string) => {
-  const res = await API.Login.login_github_AJAX({
-    code,
-  });
-  await useUserStore().setUserInfo(res.data);
+  try {
+    const res = await API.Login.login_github_AJAX({
+      code,
+    });
+    if (res.code == 200) {
+      await useUserStore().setUserInfo(res.data);
+      githubLoadingText.value = `登录成功！欢迎您${userInfo.value.email}`;
+    } else {
+      githubLoadingText.value = `登录失败！授权已过期，请重新授权`;
+    }
+  } catch (error) {
+    githubLoadingText.value = `登录失败！授权已过期，请重新授权`;
+  } finally {
+    setTimeout(() => {
+      overlay.value = false;
+      githubLoadingText.value = "";
+      clearCodeFromUrl();
+    }, 2000);
+  }
 };
+const clearCodeFromUrl = () => {
+  const url = new URL(window.location.href);
+  url.searchParams.delete("code");
+  window.history.replaceState(null, "", url.toString());
+};
+
 onMounted(() => {
   if (!(window.location.href.indexOf("code=") == -1)) {
+    githubLoadingText.value = "授权验证中...";
+    overlay.value = true;
     const urlParams = new URLSearchParams(window.location.search);
     githubLogin(urlParams.get("code")!);
   }
 });
 </script>
 <template>
+  <v-dialog v-model="overlay" max-width="370" persistent>
+    <v-list class="py-2"  elevation="12" rounded="lg">
+      <v-list-item prepend-icon="mdi-github" :title="githubLoadingText">
+        <template v-slot:prepend>
+          <div class="pe-4">
+            <v-icon color="shades" size="x-large"></v-icon>
+          </div>
+        </template>
+
+        <template v-slot:append>
+          <v-progress-circular
+            color="shades"
+            indeterminate="disable-shrink"
+            size="16"
+            width="2"
+          ></v-progress-circular>
+        </template>
+      </v-list-item>
+    </v-list>
+  </v-dialog>
   <v-app-bar scroll-behavior="elevate">
     <v-toolbar
       color="rgba(255,255,255,0.001)"
@@ -150,10 +197,29 @@ onMounted(() => {
               <v-list-item-title>选择登录方式</v-list-item-title>
               <v-list-item-title class="mt-3">
                 <v-btn-toggle variant="outlined">
-                  <v-btn variant="text">
+                  <v-btn
+                    variant="text"
+                    @click="
+                      () => {
+                        overlay = true;
+                        githubLoadingText = 'GitHub 授权中...';
+                      }
+                    "
+                  >
                     <a
-                      href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=http://localhost:5200/#/home
-"
+                      href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=http://www.shmilyyy.cn/#/home"
+                      v-if="prodStatus"
+                    >
+                      <div
+                        class="text-xs flex justify-center items-center flex-col"
+                      >
+                        <Github :size="16" />
+                        <div class="mt-1 scale-x-75 scale-y-75">github</div>
+                      </div></a
+                    >
+                    <a
+                      href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=http://localhost:5200/#/home"
+                      v-else
                     >
                       <div
                         class="text-xs flex justify-center items-center flex-col"

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port 5200 --open",
     "build": "vue-tsc && vite build",
+    "build:prod": "vue-tsc && vite build --mode production",
     "preview": "vite preview",
     "commit": "git status && git add . && git cz"
   },

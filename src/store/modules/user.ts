@@ -16,7 +16,6 @@ const useUserStore = defineStore("user", () => {
 
   /** 储存用户信息 */
   const setUserInfo = async (info: login_res) => {
-    console.log(info);
     setTokenStorage(info.token);
     setUserStorage(info);
     token.value = info.token;

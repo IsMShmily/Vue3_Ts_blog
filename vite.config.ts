@@ -30,10 +30,10 @@ export default defineConfig({
     host:'0.0.0.0',
     proxy: {
       "/api": {
-        target: "http://localhost:8000",
+        target: "http://www.shmilyyy.cn:8000",
         // ws: true,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+       
       },
     },
   },
@@ -63,6 +63,7 @@ export default defineConfig({
           }
         },
       },
+      
     },
     minify: "terser",
     terserOptions: {

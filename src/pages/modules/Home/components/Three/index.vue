@@ -12,7 +12,7 @@ import useCreateGalaxy from "./hook/useCreateGalaxy";
 import { MoveDown } from "lucide-vue-next";
 import * as CANNON from "cannon-es";
 import router from "@/router";
-
+import img4k from "@/assets/textures/rock_boulder_dry_diff_4k.jpg";
 interface Iemits {
   (e: "goMotivational"): void;
 }
@@ -50,9 +50,7 @@ const raycaster = new THREE.Raycaster(); // 创建射线
 const mouse = new THREE.Vector2(); // 创建鼠标向量
 
 const textureLoader = new THREE.TextureLoader(); //材质加载器
-const TextLogoTexture = textureLoader.load(
-  "/src/assets/textures/rock_boulder_dry_diff_4k.jpg"
-);
+const TextLogoTexture = textureLoader.load(img4k);
 /**
  * 移动到星球中心
  */
@@ -445,8 +443,7 @@ window.addEventListener("touchstart", (e) => {
 let isUp = false,
   isDown = false,
   isLeft = false,
-  isRight = false,
-  isJump = false;
+  isRight = false;
 window.addEventListener("keydown", (e) => {
   switch (e.code) {
     case "KeyW":
@@ -468,7 +465,7 @@ window.addEventListener("keydown", (e) => {
     case "Space":
       console.log("跳跃");
       figureModel.translateY(2);
-      isJump = true;
+      // isJump = true;
       break;
   }
 });
@@ -488,7 +485,7 @@ window.addEventListener("keyup", (e) => {
       isRight = false;
       break;
     case "Space":
-      isJump = false;
+      // isJump = false;
       break;
   }
 });
