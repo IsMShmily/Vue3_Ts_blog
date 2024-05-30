@@ -6,6 +6,8 @@
 
 - 博客,消息列表分页修改 ([de4f9a7f9ebdce7cc73fd13efaeb36178df82535](https://github.com/IsMShmily/Vue3_Ts_blog/commit/de4f9a7f9ebdce7cc73fd13efaeb36178df82535))
 
+- 修复携带code每次onmounted请求github登录,用户混乱问题([c4c9e5ce3c27def16c68d5d16617a560bd23b995](https://github.com/IsMShmily/Vue3_Ts_blog/commit/c4c9e5ce3c27def16c68d5d16617a560bd23b995))
+
 ### Features
 
 - 注册登录组件抽离,注册登录逻辑编写,userStore仓库逻辑编写([73bbbfb5f4fa81db658010904bbc394f38e44e47](https://github.com/IsMShmily/Vue3_Ts_blog/commit/73bbbfb5f4fa81db658010904bbc394f38e44e47))
