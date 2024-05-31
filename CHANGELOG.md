@@ -8,6 +8,8 @@
 
 - 修复携带code每次onmounted请求github登录,用户混乱问题([c4c9e5ce3c27def16c68d5d16617a560bd23b995](https://github.com/IsMShmily/Vue3_Ts_blog/commit/c4c9e5ce3c27def16c68d5d16617a560bd23b995))
 
+- 修复登录成功后提示欢迎用户id->修改为用户昵称([c4b96a992ba0020de846f92e44f2898e0681d50a](https://github.com/IsMShmily/Vue3_Ts_blog/commit/c4b96a992ba0020de846f92e44f2898e0681d50a))
+
 ### Features
 
 - 注册登录组件抽离,注册登录逻辑编写,userStore仓库逻辑编写([73bbbfb5f4fa81db658010904bbc394f38e44e47](https://github.com/IsMShmily/Vue3_Ts_blog/commit/73bbbfb5f4fa81db658010904bbc394f38e44e47))
