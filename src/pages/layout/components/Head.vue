@@ -59,7 +59,8 @@ const toggleTheme = () => {
 const Login_ref = ref();
 const overlay = ref(false);
 const githubLoadingText = ref("");
-const prodStatus = import.meta.env.NODE_ENV == "prod";
+
+const prodStatus = import.meta.env.VITE_USER_NODE_ENV == "prod";
 const userLogin = () => {
   Login_ref.value.LoginDialogstatus = true;
 };
@@ -70,7 +71,7 @@ const githubLogin = async (code: string) => {
     });
     if (res.code == 200) {
       await useUserStore().setUserInfo(res.data);
-      githubLoadingText.value = `登录成功！欢迎您${userInfo.value.email}`;
+      githubLoadingText.value = `登录成功！欢迎您${userInfo.value.userName}`;
     } else {
       githubLoadingText.value = `登录失败！授权已过期，请重新授权`;
     }
