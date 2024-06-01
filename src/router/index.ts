@@ -17,8 +17,7 @@ let router = createRouter({
 
 // 路由前置守卫
 
-router.beforeEach((to, _, next) => {
-  console.log(to);
+router.beforeEach((_to, _, next) => {
   // const userStore = createUserStore();
 
   // const whiteRouterList = [...list, ...whiteList];

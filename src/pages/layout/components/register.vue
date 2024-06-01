@@ -4,17 +4,15 @@
  */
 import API from "@/api";
 import { ref } from "vue";
-import Snackbar from "@/components/basic/Snackbar/index.vue";
+import { useToast } from "@/hook/useToast";
 
+const { showToast } = useToast();
 const signInDialog = ref(false);
 const email = ref("");
 const code = ref("");
 const password = ref("");
 const AlignPassword = ref("");
 const loading = ref(false);
-const snackbar_text = ref("");
-const Snackbar_ref = ref();
-const color = ref("");
 const isValid = ref(false);
 const form_ref = ref();
 const emailField = ref();
@@ -49,21 +47,16 @@ const sendCode = async () => {
   const res = await API.getCode_AJAX({ email: email.value });
   loading.value = false;
   if (res.code == 200) {
-    color.value = "success";
-    snackbar_text.value = "发送成功！";
-    Snackbar_ref.value.visable = true;
+    showToast("发送成功！", "success");
   } else {
-    color.value = "error";
-    Snackbar_ref.value.visable = true;
-    snackbar_text.value = `发送失败：${res.msg}`;
+    showToast(`发送失败：${res.msg}`, "error");
   }
 };
 
 /** 注册 */
 const register = async () => {
   if (password.value != AlignPassword.value) {
-    Snackbar_ref.value.visable = true;
-    snackbar_text.value = `两次密码不一致`;
+    showToast("两次密码不一致", "error");
     return;
   }
   const { valid } = await form_ref.value.validate();
@@ -79,12 +72,9 @@ const register = async () => {
       AlignPassword.value = "";
       email.value = "";
       signInDialog.value = false;
-      snackbar_text.value = `注册成功`;
-      Snackbar_ref.value.visable = true;
+      showToast("注册成功", "success");
     } else {
-      color.value = "error";
-      Snackbar_ref.value.visable = true;
-      snackbar_text.value = `注册失败：${res.msg}`;
+      showToast(`注册失败：${res.msg}`, "error");
     }
   }
 };
@@ -170,11 +160,6 @@ defineExpose({
       </v-card>
     </template>
   </v-dialog>
-  <Snackbar
-    :snackbar_text="snackbar_text"
-    :color="color"
-    ref="Snackbar_ref"
-  ></Snackbar>
 </template>
 
 <style lang="scss" scoped></style>

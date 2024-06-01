@@ -27,13 +27,12 @@ export default defineConfig({
     ],
   },
   server: {
-    host:'0.0.0.0',
+    host: "0.0.0.0",
     proxy: {
       "/api": {
-        target: "http://www.shmilyyy.cn:8000",
+        target: "http://localhost:8000",
         // ws: true,
         changeOrigin: true,
-       
       },
     },
   },
@@ -63,7 +62,6 @@ export default defineConfig({
           }
         },
       },
-      
     },
     minify: "terser",
     terserOptions: {

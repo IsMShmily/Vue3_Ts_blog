@@ -5,9 +5,11 @@
 import { ref } from "vue";
 import Register from "./register.vue";
 import API from "@/api";
-import Snackbar from "@/components/basic/Snackbar/index.vue";
-import useUserStore from "@/store/modules/user";
 
+import useUserStore from "@/store/modules/user";
+import { useToast } from "@/hook/useToast";
+
+const { showToast } = useToast();
 const LoginDialogstatus = ref(false);
 const Register_ref = ref();
 const color = ref("");
@@ -31,8 +33,6 @@ const rules = {
 const isValid = ref(false);
 const email = ref("");
 const password = ref("");
-const snackbar_text = ref("");
-const Snackbar_ref = ref();
 const form_ref = ref();
 
 const login = async () => {
@@ -43,15 +43,13 @@ const login = async () => {
       password: password.value,
     });
     if (res.code == 200) {
-      color.value = "success";
+      LoginDialogstatus.value = false;
+      showToast(`登录成功！欢迎您${res.data.userName}`, "success");
+      await useUserStore().setUserInfo(res.data);
       email.value = "";
       password.value = "";
-      await useUserStore().setUserInfo(res.data);
-      LoginDialogstatus.value = false;
     } else {
-      color.value = "error";
-      snackbar_text.value = `登录失败：${res.msg}`;
-      Snackbar_ref.value.visable = true;
+      showToast(`登录失败：${res.msg}`, "error");
     }
   }
 };
@@ -121,12 +119,6 @@ defineExpose({
       <Register ref="Register_ref"></Register>
     </template>
   </v-dialog>
-
-  <Snackbar
-    :snackbar_text="snackbar_text"
-    :color="color"
-    ref="Snackbar_ref"
-  ></Snackbar>
 </template>
 
 <style lang="scss" scoped></style>

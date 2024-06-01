@@ -12,17 +12,20 @@ import "highlight.js/lib/common";
 
 /** kangc markdown */
 import VMdEditor from "@kangc/v-md-editor";
-import VMdPreview from '@kangc/v-md-editor/lib/preview';
+import VMdPreview from "@kangc/v-md-editor/lib/preview";
 import "@kangc/v-md-editor/lib/style/base-editor.css";
 import githubTheme from "@kangc/v-md-editor/lib/theme/github.js";
 import "@kangc/v-md-editor/lib/theme/style/github.css";
+
+import "animate.css";
+
 VMdEditor.use(githubTheme, {
   Hljs: hljs,
 });
 VMdPreview.use(githubTheme, {
-    Hljs: hljs,
-  });
-  
+  Hljs: hljs,
+});
+
 //svg插件引入使用
 import "virtual:svg-icons-register";
 
@@ -30,7 +33,13 @@ import "virtual:svg-icons-register";
 import "vuetify/styles";
 import vuetify from "@/plugins/vuetify.js";
 
+import "driver.js/dist/driver.css";
+
 import pinia from "@/store/index";
+
+// 引入自定义插件
+import registerPlugins from "./plugins";
+
 const app = createApp(App);
 
 /** 注册自定义指令 */
@@ -41,6 +50,7 @@ app.directive("highlight", function (el) {
   });
 });
 
+registerPlugins(app);
 app.use(VMdEditor);
 app.use(VMdPreview);
 app.use(hljsVuePlugin);

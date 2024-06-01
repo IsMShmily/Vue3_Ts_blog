@@ -31,11 +31,11 @@ const items = [
     value: "leave",
     icon: "Send",
   },
-  // {
-  //   title: "我的",
-  //   value: "chat",
-  //   icon: "Users",
-  // },
+  {
+    title: "博客历程",
+    value: "course",
+    icon: "Users",
+  },
 ];
 const jumpRouter = (item: any) => {
   menu.value = false;

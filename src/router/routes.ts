@@ -43,6 +43,14 @@ export const constantRoute: Array<RouteRecordRaw> = [
         component: () => import("@/pages/modules/Leave/index.vue"),
       },
       {
+        path: "course",
+        name: "course",
+        meta: {
+          title: "博客历程",
+        },
+        component: () => import("@/pages/modules/Course/index.vue"),
+      },
+      {
         path: "blogsDetail",
         name: "blogsDetail",
         meta: {

@@ -96,9 +96,7 @@ onMounted(() => {
       </v-col>
 
       <v-col class="d-flex" cols="12" md="9">
-        <v-row class="ma-n3">
-          <v-col cols="12">
-            <v-sheet class="d-flex w-full p-5" :elevation="1" rounded height="">
+        <v-sheet class="d-flex w-full p-5" :elevation="1" rounded height="">
               <sheet-footer class="w-full">
                 <div class="text-center w-full text-stone-400">
                   {{ dayjs(detail?.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
@@ -116,8 +114,6 @@ onMounted(() => {
                 <v-md-preview :text="detail?.description"></v-md-preview>
               </sheet-footer>
             </v-sheet>
-          </v-col>
-        </v-row>
       </v-col>
     </v-row>
   </v-container>

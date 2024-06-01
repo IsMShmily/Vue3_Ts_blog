@@ -2,17 +2,16 @@
 /** @module 留言模态框 */
 import { ref } from "vue";
 import API from "@/api";
-import Snackbar from "@/components/basic/Snackbar/index.vue";
+import { useToast } from "@/hook/useToast";
 
 interface IEmits {
   (e: "updataList"): void;
 }
-
+const { showToast } = useToast();
 const visable = ref(false);
 const isValid = ref(false);
 const content = ref("");
-const Snackbar_ref = ref();
-const snackbar_text = ref("");
+
 const emits = defineEmits<IEmits>();
 const contentRules = [
   (value: any) => {
@@ -29,13 +28,11 @@ const sendMessage = async () => {
   });
   if (res.code == 200) {
     visable.value = false;
-    snackbar_text.value = "留言成功！";
-    Snackbar_ref.value.visable = true;
+    showToast("留言成功！", "success");
     emits("updataList");
     content.value = "";
   } else {
-    snackbar_text.value = res.msg;
-    Snackbar_ref.value.visable = true;
+    showToast(`${res.msg}`, "error");
   }
 };
 
@@ -71,7 +68,6 @@ defineExpose({
       </template>
     </v-card>
   </v-dialog>
-  <Snackbar :snackbar_text="snackbar_text" ref="Snackbar_ref"></Snackbar>
 </template>
 
 <style lang="scss" scoped></style>
