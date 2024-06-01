@@ -12,7 +12,6 @@ import { useToast } from "@/hook/useToast";
 const { showToast } = useToast();
 const LoginDialogstatus = ref(false);
 const Register_ref = ref();
-const color = ref("");
 
 const openSignInDiaog = () => {
   Register_ref.value.signInDialog = true;
