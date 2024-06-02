@@ -62,9 +62,15 @@ onMounted(() => {
                   <SvgIcon
                     name="love"
                     size="20"
+                    class="animate__animated animate__tada"
                     v-if="detail?.isLike"
                   ></SvgIcon>
-                  <SvgIcon name="love-no" size="18" v-else></SvgIcon>
+                  <SvgIcon
+                    name="love-no"
+                    size="18"
+                    v-else
+                    class="animate__animated animate__tada"
+                  ></SvgIcon>
                   <div class="ml-1 text-xs font-bold">{{ detail?.praise }}</div>
                 </v-btn>
               </div>
@@ -97,23 +103,23 @@ onMounted(() => {
 
       <v-col class="d-flex" cols="12" md="9">
         <v-sheet class="d-flex w-full p-5" :elevation="1" rounded height="">
-              <sheet-footer class="w-full">
-                <div class="text-center w-full text-stone-400">
-                  {{ dayjs(detail?.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
-                </div>
-                <div class="text-xl text-center w-full mt-2">
-                  {{ detail?.title }}
-                </div>
-                <v-divider class="my-5" :thickness="2"></v-divider>
-                <!-- <div class="mt-1" v-highlight v-html="detail?.description"></div> -->
-                <!-- <v-md-editor
+          <sheet-footer class="w-full">
+            <div class="text-center w-full text-stone-400">
+              {{ dayjs(detail?.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
+            </div>
+            <div class="text-xl text-center w-full mt-2">
+              {{ detail?.title }}
+            </div>
+            <v-divider class="my-5" :thickness="2"></v-divider>
+            <!-- <div class="mt-1" v-highlight v-html="detail?.description"></div> -->
+            <!-- <v-md-editor
                   v-model="text"
                   @change="editorChange"
                   height="400px"
                 ></v-md-editor> -->
-                <v-md-preview :text="detail?.description"></v-md-preview>
-              </sheet-footer>
-            </v-sheet>
+            <v-md-preview :text="detail?.description"></v-md-preview>
+          </sheet-footer>
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>

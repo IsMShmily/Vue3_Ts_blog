@@ -124,8 +124,18 @@ onMounted(() => {
                     <SvgIcon name="look" size="20" class="ml-2"></SvgIcon>
                     <div class="ml-1 text-xs font-bold">{{ i.browse }}</div>
                     <v-btn class="ml-3" @click.stop="love(i.id)">
-                      <SvgIcon name="love" size="20" v-if="i?.isLike"></SvgIcon>
-                      <SvgIcon name="love-no" size="16" v-else></SvgIcon>
+                      <SvgIcon
+                        name="love"
+                        size="20"
+                        v-if="i?.isLike"
+                        class="animate__animated animate__tada"
+                      ></SvgIcon>
+                      <SvgIcon
+                        name="love-no"
+                        size="16"
+                        v-else
+                        class="animate__animated animate__tada"
+                      ></SvgIcon>
                       <div class="ml-1 text-xs font-bold">{{ i.praise }}</div>
                     </v-btn>
                   </v-card-actions>
