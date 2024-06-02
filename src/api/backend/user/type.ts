@@ -20,5 +20,24 @@ export type login_res = {
   email: string;
   createdAt: string;
   updatedAt: string;
-  token: string;
+  token?: string;
+  githubId?: number;
+};
+
+export type update_userInfo_type = {
+  userName?: string;
+  email?: string;
+  password?: string;
+  avatar?: string;
+};
+
+export type get_userInfo_res = {
+  id: number;
+  userName: string;
+  avatar: string;
+  userType: boolean;
+  email: string;
+  password: string;
+  createdAt: string;
+  updatedAt: string;
 };

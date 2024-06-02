@@ -5,6 +5,7 @@ import type { ResponseData } from "@/utils/request";
 enum API {
   GET_CODE_API = "/sendCode",
   FRONT_COMMITS_API = "/frontGit/commits",
+  UPLOAD_IMG_API = "/upload",
 }
 
 /**
@@ -22,3 +23,17 @@ export const getCode_AJAX = (data: code_type): Promise<ResponseData<boolean>> =>
 export const getFrontCommits_AJAX = (): Promise<
   ResponseData<front_commits_res>
 > => REQUEST("GET", API.FRONT_COMMITS_API);
+
+/**
+ * @description: 上传图片 /upload
+ * @param {FormData} data
+ * @return {*}
+ */
+export const uploadImg_AJAX = (data: {
+  file: FormData;
+}): Promise<ResponseData<string>> =>
+  REQUEST("POST", API.UPLOAD_IMG_API, data.file, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });

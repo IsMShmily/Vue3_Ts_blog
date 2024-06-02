@@ -11,14 +11,14 @@ const { showToast } = useToast();
 const visable = ref(false);
 const isValid = ref(false);
 const content = ref("");
-
+const contentRef = ref();
 const emits = defineEmits<IEmits>();
 const contentRules = [
   (value: any) => {
     if (value?.length > 0) return true;
     return "留言消息不能为空";
   },
-  (v: any) => v.length <= 50 || "留言消息不能超过50个字符",
+  (v: any) => v?.length <= 50 || "留言消息不能超过50个字符",
 ];
 
 /** 发送消息 */
@@ -27,10 +27,11 @@ const sendMessage = async () => {
     content: content.value,
   });
   if (res.code == 200) {
+    contentRef.value.reset();
+    contentRef.value.resetValidation();
     visable.value = false;
     showToast("留言成功！", "success");
     emits("updataList");
-    content.value = "";
   } else {
     showToast(`${res.msg}`, "error");
   }
@@ -48,6 +49,7 @@ defineExpose({
 
       <v-form class="w-full" v-model="isValid">
         <v-textarea
+          ref="contentRef"
           v-model="content"
           :rules="contentRules"
           label="留言消息"

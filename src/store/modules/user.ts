@@ -16,9 +16,11 @@ const useUserStore = defineStore("user", () => {
 
   /** 储存用户信息 */
   const setUserInfo = async (info: login_res) => {
-    setTokenStorage(info.token);
+    if (info.token) {
+      setTokenStorage(info.token);
+      token.value = info.token;
+    }
     setUserStorage(info);
-    token.value = info.token;
     userInfo.value = info;
   };
 

@@ -46,6 +46,11 @@ const items = [
     value: "course",
     icon: "Users",
   },
+  {
+    title: "我的",
+    value: "my",
+    icon: "Users",
+  },
 ];
 const jumpRouter = (item: any) => {
   localStorage.setItem("activeMenu", item.value);
@@ -147,7 +152,7 @@ onMounted(() => {
       <v-toolbar-title class="">
         <div class="flex items-center">
           <img src="/logo.png" class="rounded-full w-10" alt="" />
-          <div class="ml-3 font-bold cursor-pointer">shmily_yy blog</div>
+          <div class="ml-3 font-bold cursor-pointer">Shmily_yy Blog</div>
         </div>
       </v-toolbar-title>
 
@@ -272,6 +277,7 @@ onMounted(() => {
               v-for="(item, i) in items"
               :key="i"
               class="min-w-36 text-center cursor-pointer"
+              :disabled="item.value == 'my' && !token"
             >
               <v-list-item-title @click="jumpRouter(item)">{{
                 item.title
@@ -296,6 +302,7 @@ onMounted(() => {
             :value="item.value"
             v-for="item in items"
             :key="item.value"
+            :disabled="item.value == 'my' && !token"
             @click="jumpRouter(item)"
           >
             <span class="hidden-sm-and-down">{{ item.title }}</span>
@@ -347,7 +354,8 @@ onMounted(() => {
                   </v-dialog>
                 </template>
               </v-list-item>
-              <v-list-item v-else class="text-center">
+
+              <v-list-item v-if="!token" class="text-center">
                 <v-list-item-title>选择登录方式</v-list-item-title>
                 <v-list-item-title class="mt-3">
                   <v-btn-toggle variant="outlined">

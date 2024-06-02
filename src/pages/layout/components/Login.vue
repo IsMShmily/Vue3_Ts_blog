@@ -45,8 +45,8 @@ const login = async () => {
       LoginDialogstatus.value = false;
       showToast(`登录成功！欢迎您${res.data.userName}`, "success");
       await useUserStore().setUserInfo(res.data);
-      email.value = "";
-      password.value = "";
+      form_ref.value.reset();
+      form_ref.value.resetValidation();
     } else {
       showToast(`登录失败：${res.msg}`, "error");
     }

@@ -17,6 +17,7 @@ export const setTokenStorage = (token: string) => {
 export const removeTokenStorage = () => {
   return localStorage.removeItem(key);
 };
+
 /** 获取用户信息 */
 export const getUserStorage = () => {
   return localStorage.getItem(userKey);

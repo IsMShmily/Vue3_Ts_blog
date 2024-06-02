@@ -1,4 +1,9 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import axios, {
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError,
+  AxiosRequestConfig,
+} from "axios";
 
 export interface ResponseData<T = any> {
   code: number;
@@ -61,13 +66,14 @@ request.interceptors.response.use(
 export default function requestWithMethod(
   method: RequestMethod,
   url: string,
-  data?: any
+  data?: any,
+  config?: AxiosRequestConfig
 ): Promise<any> {
   switch (method) {
     case "GET":
-      return request.get(url, { params: data });
+      return request.get(url, { params: data, ...config });
     case "POST":
-      return request.post(url, data);
+      return request.post(url, data, config);
     case "PUT":
       return request.put(url, data);
     case "DELETE":

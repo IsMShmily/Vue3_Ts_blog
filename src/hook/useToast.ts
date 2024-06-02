@@ -12,7 +12,7 @@ export function useToast() {
   const showToast = (
     message: string,
     type: "info" | "success" | "error" = "info",
-    duration = 3000
+    duration = 5000
   ) => {
     if (instance.proxy) {
       instance.proxy.$toast.show(message, type, duration);

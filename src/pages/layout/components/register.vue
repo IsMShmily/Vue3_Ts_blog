@@ -18,6 +18,7 @@ const form_ref = ref();
 const emailField = ref();
 const pwdShow = ref(false);
 const pwdShow2 = ref(false);
+
 const rules = {
   email: [
     (v: string) => !!v || "邮箱不能为空",
@@ -25,7 +26,7 @@ const rules = {
   ],
   code: [
     (v: string) => !!v || "验证码不能为空",
-    (v: string) => v.length == 4 || "验证码应为4位字符",
+    (v: string) => v?.length == 4 || "验证码应为4位字符",
   ],
   password: [
     (v: string) => !!v || "密码不能为空",
@@ -67,10 +68,8 @@ const register = async () => {
       password: password.value,
     });
     if (res.code == 200) {
-      code.value = "";
-      password.value = "";
-      AlignPassword.value = "";
-      email.value = "";
+      form_ref.value.reset();
+      form_ref.value.resetValidation();
       signInDialog.value = false;
       showToast("注册成功", "success");
     } else {
