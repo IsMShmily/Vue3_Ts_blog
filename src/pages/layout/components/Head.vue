@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import { useTheme } from "vuetify";
-import { Moon, Sun, EllipsisVertical } from "lucide-vue-next";
+import {
+  Moon,
+  Sun,
+  EllipsisVertical,
+  Github,
+  UserRoundPlus,
+  LogOut,
+} from "lucide-vue-next";
 import { onMounted, ref } from "vue";
 import router from "@/router";
 import { storeToRefs } from "pinia";
-import { Github, UserRoundPlus, LogOut } from "lucide-vue-next";
 import Login from "./Login.vue";
 import useUserStore from "@/store/modules/user";
 import API from "@/api";
+import { useDisplay } from "vuetify";
+import noLoginImg from "@/assets/img/noLogin.png";
+
+const { mdAndUp } = useDisplay();
 const userStore = useUserStore();
 const { userInfo, token } = storeToRefs(userStore);
 const theme = useTheme();
@@ -38,6 +48,7 @@ const items = [
   },
 ];
 const jumpRouter = (item: any) => {
+  localStorage.setItem("activeMenu", item.value);
   menu.value = false;
   router.push(item.value);
 };
@@ -45,6 +56,12 @@ const goOut = () => {
   userStore.delUserInfo();
   dialog.value = false;
 };
+/** @module 移动端与Pc菜单逻辑 */
+const activeMenu = ref(
+  localStorage.getItem("activeMenu")
+    ? localStorage.getItem("activeMenu")
+    : "home"
+);
 /**
  * @description: 切换主题
  * @return {*}
@@ -102,7 +119,7 @@ onMounted(() => {
 </script>
 <template>
   <v-dialog v-model="overlay" max-width="370" persistent>
-    <v-list class="py-2"  elevation="12" rounded="lg">
+    <v-list class="py-2" elevation="12" rounded="lg">
       <v-list-item prepend-icon="mdi-github" :title="githubLoadingText">
         <template v-slot:prepend>
           <div class="pe-4">
@@ -141,6 +158,7 @@ onMounted(() => {
         elevation="3"
         rounded="xl"
         icon=""
+        v-if="!mdAndUp"
       >
         <v-expand-x-transition>
           <Moon v-show="!theme.global.current.value.dark" :size="17" />
@@ -150,7 +168,13 @@ onMounted(() => {
         </v-expand-x-transition>
       </v-btn>
 
-      <v-menu v-model="menu" :close-on-content-click="false" location="top">
+      <!-- 小屏展示 -->
+      <v-menu
+        v-model="menu"
+        :close-on-content-click="false"
+        location="top"
+        v-if="!mdAndUp"
+      >
         <template v-slot:activator="{ props }">
           <v-btn
             size="small"
@@ -257,6 +281,125 @@ onMounted(() => {
         </v-card>
         <!-- card -->
       </v-menu>
+
+      <!-- 大屏展示 -->
+      <template v-else>
+        <v-switch
+          @click="toggleTheme"
+          hide-details
+          class="mr-5"
+          color="blue-grey-darken-2"
+        ></v-switch>
+
+        <v-btn-toggle v-model="activeMenu" borderless>
+          <v-btn
+            :value="item.value"
+            v-for="item in items"
+            :key="item.value"
+            @click="jumpRouter(item)"
+          >
+            <span class="hidden-sm-and-down">{{ item.title }}</span>
+          </v-btn>
+        </v-btn-toggle>
+
+        <v-menu v-model="menu" :close-on-content-click="false" location="top">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              size="small"
+              elevation="3"
+              icon=""
+              class="ml-5"
+              @click="drawer = true"
+              v-bind="props"
+            >
+              <v-avatar :image="noLoginImg" v-if="!userInfo?.avatar"></v-avatar>
+              <v-avatar :image="userInfo?.avatar" v-else></v-avatar>
+            </v-btn>
+          </template>
+
+          <!-- card -->
+          <v-card min-width="280">
+            <v-list>
+              <v-list-item
+                v-if="token"
+                :prepend-avatar="userInfo?.avatar"
+                subtitle="欢迎来到shmily_yy的博客"
+                :title="userInfo?.userName"
+              >
+                <template v-slot:append>
+                  <v-dialog v-model="dialog" max-width="400" persistent>
+                    <template v-slot:activator="{ props: activatorProps }">
+                      <v-btn variant="text" v-bind="activatorProps">
+                        <LogOut :size="16"
+                      /></v-btn>
+                    </template>
+
+                    <v-card
+                      prepend-icon="mdi-logout-variant"
+                      title="你确定要退出登录吗？"
+                    >
+                      <template v-slot:actions>
+                        <v-spacer></v-spacer>
+                        <v-btn @click="dialog = false"> 取消 </v-btn>
+                        <v-btn @click="goOut"> 确认 </v-btn>
+                      </template>
+                    </v-card>
+                  </v-dialog>
+                </template>
+              </v-list-item>
+              <v-list-item v-else class="text-center">
+                <v-list-item-title>选择登录方式</v-list-item-title>
+                <v-list-item-title class="mt-3">
+                  <v-btn-toggle variant="outlined">
+                    <v-btn
+                      variant="text"
+                      @click="
+                        () => {
+                          overlay = true;
+                          githubLoadingText = 'GitHub 授权中...';
+                        }
+                      "
+                    >
+                      <a
+                        href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=http://www.shmilyyy.cn/#/home"
+                        v-if="prodStatus"
+                      >
+                        <div
+                          class="text-xs flex justify-center items-center flex-col"
+                        >
+                          <Github :size="16" />
+                          <div class="mt-1 scale-x-75 scale-y-75">github</div>
+                        </div></a
+                      >
+                      <a
+                        href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=http://localhost:5200/#/home"
+                        v-else
+                      >
+                        <div
+                          class="text-xs flex justify-center items-center flex-col"
+                        >
+                          <Github :size="16" />
+                          <div class="mt-1 scale-x-75 scale-y-75">github</div>
+                        </div></a
+                      >
+                    </v-btn>
+                    <v-btn variant="text" @click="userLogin">
+                      <div
+                        class="text-xs flex justify-center items-center flex-col"
+                      >
+                        <UserRoundPlus :size="16" />
+                        <div class="mt-1 scale-x-75 scale-y-75">已有用户</div>
+                      </div>
+                    </v-btn>
+                  </v-btn-toggle></v-list-item-title
+                >
+                <template v-slot:append> </template>
+              </v-list-item>
+            </v-list>
+          </v-card>
+          <!-- card -->
+        </v-menu>
+      </template>
     </v-toolbar>
   </v-app-bar>
 
