@@ -9,6 +9,7 @@ import type {
   get_score_list_res,
 } from "@/api/backend/score/type";
 import { useToast } from "@/hook/useToast";
+import useUserStore from "@/store/modules/user";
 
 const { showToast } = useToast();
 const list = ref<front_commits_res>();
@@ -16,6 +17,7 @@ const loading = ref(true);
 const labels = ["bad", "so so", "ok", "good", "great"];
 const colors = ["red", "orange", "grey", "cyan", "green"];
 const rating = ref(4);
+const userStore = useUserStore();
 
 const getFrontCommits = async () => {
   const res = await API.getFrontCommits_AJAX();
@@ -47,7 +49,7 @@ const addScore = async () => {
 /** 获取当前分值和总打分个数 */
 const getScore = async () => {
   const res = await API.Score.getScore_AJAX({
-    userId: 13,
+    userId: userStore.userInfo ? userStore.userInfo.id : null,
   });
   scoreDetail.value = res.data;
   rating.value = res.data.MyStar;
