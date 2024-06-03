@@ -1,1 +1,0 @@
-import{aJ as o}from"./.pnpm-Bx6NWvas.js";function t(){const t=o();if(!t)throw new Error("useToast must be called within a component setup function.");return{showToast:(o,n="info",s=5e3)=>{t.proxy&&t.proxy.$toast.show(o,n,s)}}}export{t as u};

@@ -18,8 +18,9 @@ const rules = [
   (value: any) => (value && value.length <= 10) || "起这么长名字？作者不同意",
 ];
 const updateUserName = async () => {
-  const { valid } = await userName_text_ref.value.validate();
-  if(valid.length) return
+  const valid = await userName_text_ref.value.validate();
+  console.log("valid", valid);
+  if(valid && valid.length) return
   loadingStatus.value = true;
   const res = await API.Login.updateUserInfo_AJAX({
     userName: userName.value,
