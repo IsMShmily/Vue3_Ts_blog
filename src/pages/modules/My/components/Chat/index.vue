@@ -32,7 +32,6 @@ const iptVal = ref("");
 const iptRef = ref();
 const sendMsg = async () => {
   const valid = await iptRef.value.validate();
-  console.log("valid---", valid);
   if (valid.length) return;
   const msg = {
     id: userStore.userInfo.id,

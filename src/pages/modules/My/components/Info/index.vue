@@ -97,6 +97,9 @@ const emailRules = [
 ];
 
 const updatePassword = async () => {
+  const {valid} = await password_ref.value.validate()
+  console.log(valid)
+  if(!valid) return
   const res = await API.Login.updateUserInfo_AJAX({
     password: alignPassword.value,
     email: email.value,
