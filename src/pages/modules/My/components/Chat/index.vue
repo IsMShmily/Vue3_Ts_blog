@@ -7,7 +7,12 @@ const userStore = useUserStore();
 const socket =
   import.meta.env.VITE_USER_NODE_ENV == "dev"
     ? io("http://localhost:8000")
-    : io("https://www.shmilyyy.cn/api");
+    : io("https://www.shmilyyy.cn", {
+        path: '/socket.io',
+        withCredentials: true,
+        transports: ["websocket"],
+      });
+
 
 /** @module 消息相关 */
 interface itemProps {
@@ -41,7 +46,7 @@ const sendMsg = async () => {
     content: iptVal.value,
     market: 2,
   };
-  iptRef.value.reset()
+  iptRef.value.reset();
   socket.emit("sendMsg", msg);
   setTimeout(() => {
     scrollToBottom();
