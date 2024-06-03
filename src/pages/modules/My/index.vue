@@ -8,7 +8,7 @@ const tab = ref("one");
   <v-card>
     <v-tabs v-model="tab">
       <v-tab value="one">我的信息</v-tab>
-      <v-tab value="two">聊天室</v-tab>
+      <v-tab value="two" disabled>聊天室</v-tab>
     </v-tabs>
 
     <v-window v-model="tab" class="p-5">

@@ -74,7 +74,6 @@ const getUserInfo = async () => {
 };
 
 /** @module 修改密码 */
-const password = ref("");
 const newPassword = ref("");
 const alignPassword = ref("");
 const password_ref = ref();
@@ -89,12 +88,7 @@ const newPasswordRule = [
     /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{6,}$/.test(v) ||
     "密码应为字母和数字组成，且不能小于6位",
 ];
-const passwordRules = [
-  (v: string) => !!v || "密码不能为空",
-  (v: string) =>
-    /^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{6,}$/.test(v) ||
-    "密码应为字母和数字组成，且不能小于6位",
-];
+
 const emailRules = [
   (v: string) => !!v || "邮箱不能为空",
   (v: string) => /.+@.+\..+/.test(v) || "请输入正确的邮箱",
@@ -108,6 +102,7 @@ const updatePassword = async () => {
   if (res.code == 200) {
     password_ref.value.reset();
     password_ref.value.resetValidation();
+    getUserInfo()
     showToast("密码修改成功！", "success");
   } else {
     showToast("密码修改失败！", "error");
@@ -225,7 +220,7 @@ const updatePassword = async () => {
                 <span v-if="expanded">
                   {{
                     userStore.userInfo?.githubId
-                      ? "Tip：GitHub一键登录用户 初始密码为 ' 123456abc ' "
+                      ? "Tip：GitHub一键登录用户 需要初始化一个邮箱哦~ "
                       : "开始修改你的密码 😎"
                   }}
                 </span>
@@ -249,12 +244,6 @@ const updatePassword = async () => {
               ></v-text-field>
 
               <v-text-field
-                v-model="password"
-                :rules="passwordRules"
-                label="原密码"
-              ></v-text-field>
-
-              <v-text-field
                 v-model="newPassword"
                 :rules="newPasswordRule"
                 label="新的密码"
@@ -272,7 +261,7 @@ const updatePassword = async () => {
                 block
                 :loading="loadingStatus"
                 @click="updatePassword"
-                >修改密码</v-btn
+                >提交</v-btn
               >
             </v-form>
           </v-row>

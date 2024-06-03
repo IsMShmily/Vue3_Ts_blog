@@ -58,8 +58,10 @@ const jumpRouter = (item: any) => {
   router.push(item.value);
 };
 const goOut = () => {
-  userStore.delUserInfo();
   dialog.value = false;
+  userStore.delUserInfo();
+  router.push("/course");
+  localStorage.setItem("activeMenu", "course");
 };
 /** @module 移动端与Pc菜单逻辑 */
 const activeMenu = ref(
@@ -237,7 +239,7 @@ onMounted(() => {
                     "
                   >
                     <a
-                      href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=http://www.shmilyyy.cn/#/home"
+                      href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=https://www.shmilyyy.cn/#/home"
                       v-if="prodStatus"
                     >
                       <div
@@ -369,7 +371,7 @@ onMounted(() => {
                       "
                     >
                       <a
-                        href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=http://www.shmilyyy.cn/#/home"
+                        href="https://github.com/login/oauth/authorize?client_id=Ov23ctUuyRd07F88pHxd&redirect_uri=https://www.shmilyyy.cn/#/home"
                         v-if="prodStatus"
                       >
                         <div
