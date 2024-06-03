@@ -213,14 +213,14 @@ onMounted(() => {
                   size="x-small"
                 >
                   <div class="flex items-center mb-3">
-                    <v-avatar :image="item.avatar" class="mr-4"></v-avatar>
+                    <v-avatar :image="item.avatar" class="mr-4 self-start"></v-avatar>
                     <div>
                       <div class="font-weight-normal">
                         <strong>{{ item.name }}</strong> @
                         {{ dayjs(item.date).format("YYYY-MM-DD HH:mm:ss") }}
                       </div>
 
-                      <div>{{ item.message }}</div>
+                      <div class="pr-4">{{ item.message }}</div>
                     </div>
                   </div>
                 </v-timeline-item>
